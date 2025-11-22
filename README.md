@@ -1,8 +1,8 @@
-# 🚀 Vibe Coder
+# 🚀 AI Coder
 
 > **AI-Powered Code Generation Platform** - Transform your ideas into beautiful, functional HTML web applications through natural conversation.
 
-![Vibe Coder](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![AI Coder](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![React](https://img.shields.io/badge/React-19.2.0-61dafb.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-3178c6.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
@@ -11,7 +11,7 @@
 
 ## 📖 Overview
 
-**Vibe Coder** is an intelligent web application that allows you to create stunning, production-ready HTML websites simply by describing what you want to build. Powered by AI, it generates complete, self-contained HTML files with modern design, responsive layouts, and interactive features.
+**AI Coder** is an intelligent web application that allows you to create stunning, production-ready HTML websites simply by describing what you want to build. Powered by AI, it generates complete, self-contained HTML files with modern design, responsive layouts, and interactive features.
 
 ### ✨ Key Features
 
@@ -30,7 +30,7 @@
 
 ## 🎬 Demo
 
-![Vibe Coder Demo](demo.gif)
+![AI Coder Demo](demo.gif)
 
 **Try it live:** [Your Demo URL]
 
@@ -161,7 +161,7 @@ The AI generates HTML files with:
 ## 📁 Project Structure
 
 ```
-vibe-coder/
+ai-coder/
 ├── src/
 │   ├── components/
 │   │   ├── ChatInterface.tsx    # Chat UI with message history

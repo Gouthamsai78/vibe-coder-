@@ -3,6 +3,23 @@ import OpenAI from 'openai';
 const SYSTEM_PROMPT = `
 You are an expert frontend developer and UI/UX designer. Your task is to generate a SINGLE HTML file that contains all necessary HTML, CSS, and JavaScript to build the requested web application.
 
+### CRITICAL OUTPUT RULES
+**ABSOLUTE REQUIREMENT**: Your response must start with the raw HTML code, followed by a summary.
+
+**FORMAT:**
+1. Start IMMEDIATELY with "<!DOCTYPE html>" - NO text before it
+2. Write the complete HTML code
+3. After the closing </html> tag, add a line break and the delimiter: ---SUMMARY---
+4. Then write a brief, friendly summary of what you created (1-2 sentences)
+
+**EXAMPLE OUTPUT:**
+<!DOCTYPE html>
+<html lang="en">
+...entire HTML code...
+</html>
+---SUMMARY---
+I created a beautiful portfolio page with smooth animations, responsive design, and interactive sections including About, Skills, Projects, and Contact.
+
 ### DESIGN GUIDELINES
 - **Visual Style**: Use modern, premium aesthetics. Respect user's design preferences (minimalist, glassmorphism, etc.).
 - **CSS Framework**: Use TailwindCSS (via CDN) for styling. It is robust and flexible.
@@ -17,7 +34,6 @@ You are an expert frontend developer and UI/UX designer. Your task is to generat
 2. **Libraries**: You can use external libraries via CDN (e.g., FontAwesome, Google Fonts, TailwindCSS).
 3. **Code Quality**: Write clean, commented, and production-ready code.
 4. **Error Handling**: If the app relies on an API, include retry logic or graceful error messages.
-5. **No Markdown**: Do NOT wrap the output in markdown code blocks (e.g., \`\`\`html). Return ONLY the raw HTML.
 
 ### REQUIRED FOOTER BRANDING
 **CRITICAL**: Every HTML file you generate MUST include a footer at the bottom of the page with the following text:
@@ -40,7 +56,11 @@ Style the footer appropriately to match the design of the page. Make it subtle b
 - Preserve all existing features, styles, and functionality.
 - Build incrementally - don't regenerate everything from scratch.
 
-Your goal is to WOW the user with the design and functionality.
+REMEMBER: 
+1. Start with "<!DOCTYPE html>" 
+2. End with "</html>"
+3. Add "---SUMMARY---" on a new line
+4. Write a brief summary
 `;
 
 export const generateCodeStream = async (
@@ -48,7 +68,7 @@ export const generateCodeStream = async (
     messages: { role: 'user' | 'assistant'; content: string }[],
     currentCode: string,
     onChunk: (chunk: string) => void
-): Promise<string> => {
+): Promise<{ code: string; summary: string }> => {
     const openai = new OpenAI({
         apiKey: apiKey,
         baseURL: 'https://openrouter.ai/api/v1',
@@ -84,9 +104,20 @@ Generate the full HTML file based on the conversation above.
             }
         }
 
-        // Cleanup markdown code blocks if present (post-processing)
-        const cleanedContent = fullContent.replace(/```html/g, '').replace(/```/g, '').trim();
-        return cleanedContent;
+        // Clean up markdown code blocks if present
+        let cleanedContent = fullContent.replace(/```html/g, '').replace(/```/g, '').trim();
+
+        // Parse summary if present
+        let summary = 'I have updated the code based on your request.';
+        let code = cleanedContent;
+
+        if (cleanedContent.includes('---SUMMARY---')) {
+            const parts = cleanedContent.split('---SUMMARY---');
+            code = parts[0].trim();
+            summary = parts[1]?.trim() || summary;
+        }
+
+        return { code, summary };
     } catch (error) {
         console.error('Error generating code:', error);
         throw error;

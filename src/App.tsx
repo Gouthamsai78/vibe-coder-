@@ -16,7 +16,7 @@ function App() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vibe Coder Preview</title>
+    <title>AI Coder Preview</title>
     <style>
         body {
             font-family: system-ui, -apple-system, sans-serif;
@@ -42,7 +42,7 @@ function App() {
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Vibe Coder</h1>
+        <h1>Welcome to AI Coder</h1>
         <p>Describe what you want to build in the chat!</p>
     </div>
 </body>
@@ -75,13 +75,16 @@ function App() {
 
       let accumulatedCode = '';
 
-      const finalCode = await generateCodeStream(apiKey, newMessages, code, (chunk) => {
+      const result = await generateCodeStream(apiKey, newMessages, code, (chunk) => {
         accumulatedCode += chunk;
         setCode(accumulatedCode);
       });
 
-      setCode(finalCode);
-      setMessages(prev => [...prev, { role: 'assistant', content: 'I have updated the code based on your request.' }]);
+      // Set the final cleaned code
+      setCode(result.code);
+
+      // Add the AI's summary to the chat
+      setMessages(prev => [...prev, { role: 'assistant', content: result.summary }]);
     } catch (error) {
       setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, something went wrong. Please check your API key and try again.' }]);
     } finally {
@@ -111,9 +114,9 @@ function App() {
           </div>
           <div>
             <h1 className="font-bold text-xl tracking-tight bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-              Vibe Coder
+              AI Coder
             </h1>
-            <span className="text-xs text-gray-500 font-medium">AI-Powered Agent</span>
+            <span className="text-xs text-gray-500 font-medium">by Goutham Sai</span>
           </div>
         </div>
         <div className="flex items-center gap-4">
