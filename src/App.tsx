@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Settings, Code2, Download } from 'lucide-react';
+import { Settings, Code2, Download, Home } from 'lucide-react';
 import CodeEditor from './components/CodeEditor';
 import Preview from './components/Preview';
 import ChatInterface from './components/ChatInterface';
+import LandingPage from './components/LandingPage';
 import { generateCodeStream } from './services/ai';
 
 interface Message {
@@ -11,6 +12,7 @@ interface Message {
 }
 
 function App() {
+  const [showLanding, setShowLanding] = useState(true);
   const [code, setCode] = useState<string>(`<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,6 +106,14 @@ function App() {
     URL.revokeObjectURL(url);
   };
 
+  const handleGetStarted = () => {
+    setShowLanding(false);
+  };
+
+  if (showLanding) {
+    return <LandingPage onGetStarted={handleGetStarted} />;
+  }
+
   return (
     <div className="flex h-screen w-full flex-col bg-[#0f0f0f] text-white overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-900 via-[#0f0f0f] to-black">
       {/* Header */}
@@ -120,6 +130,14 @@ function App() {
           </div>
         </div>
         <div className="flex items-center gap-4">
+          <button
+            onClick={() => setShowLanding(true)}
+            className="glass glass-hover flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-all duration-200"
+            title="Back to Home"
+          >
+            <Home className="h-4 w-4" />
+            <span>Home</span>
+          </button>
           <button
             onClick={handleDownload}
             className="glass glass-hover flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-all duration-200"
