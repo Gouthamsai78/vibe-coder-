@@ -12,7 +12,14 @@ interface Message {
 }
 
 function App() {
-  const [showLanding, setShowLanding] = useState(true);
+  // Check if user has used the app before (has API key)
+  const hasUsedBefore = () => {
+    const apiKey = localStorage.getItem('openrouter_api_key');
+    const hasVisited = localStorage.getItem('has_visited_app');
+    return !!(apiKey && hasVisited);
+  };
+
+  const [showLanding, setShowLanding] = useState(!hasUsedBefore());
   const [code, setCode] = useState<string>(`<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,6 +114,7 @@ function App() {
   };
 
   const handleGetStarted = () => {
+    localStorage.setItem('has_visited_app', 'true');
     setShowLanding(false);
   };
 

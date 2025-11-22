@@ -16,9 +16,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
                     <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-pulse delay-700" />
                 </div>
 
-                <div className="relative max-w-7xl mx-auto px-6 py-24 sm:py-32">
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 lg:py-32">
                     {/* Logo */}
-                    <div className="flex items-center gap-3 mb-8">
+                    <div className="flex items-center gap-3 mb-6 sm:mb-8">
                         <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
                             <Code2 className="h-7 w-7 text-white" />
                         </div>
@@ -33,18 +33,18 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
                     {/* Hero Content */}
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <div>
-                            <div className="inline-block px-4 py-2 rounded-full bg-blue-600/10 border border-blue-600/20 text-blue-400 text-sm font-medium mb-6">
+                            <div className="inline-block px-3 sm:px-4 py-2 rounded-full bg-blue-600/10 border border-blue-600/20 text-blue-400 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
                                 🚀 AI-Powered Code Generation
                             </div>
 
-                            <h2 className="text-5xl sm:text-6xl font-bold mb-6 leading-tight">
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
                                 Transform Ideas into{' '}
                                 <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                                     Beautiful Code
                                 </span>
                             </h2>
 
-                            <p className="text-xl text-gray-400 mb-8 leading-relaxed">
+                            <p className="text-base sm:text-lg lg:text-xl text-gray-400 mb-6 sm:mb-8 leading-relaxed">
                                 Describe what you want to build in plain English, and watch AI Coder generate
                                 production-ready HTML, CSS, and JavaScript in real-time.
                             </p>
@@ -52,7 +52,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <button
                                     onClick={onGetStarted}
-                                    className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300 flex items-center justify-center gap-2"
+                                    className="group px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-semibold text-base sm:text-lg hover:shadow-lg hover:shadow-blue-500/50 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
                                 >
                                     Get Started Free
                                     <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -62,14 +62,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
                                     href="https://github.com/Gouthamsai78/vibe-coder-"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="px-8 py-4 bg-white/5 border border-white/10 rounded-xl font-semibold text-lg hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2"
+                                    className="px-6 sm:px-8 py-3 sm:py-4 bg-white/5 border border-white/10 rounded-xl font-semibold text-base sm:text-lg hover:bg-white/10 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
                                 >
                                     <Github className="h-5 w-5" />
                                     View on GitHub
                                 </a>
                             </div>
 
-                            <div className="mt-8 flex items-center gap-6 text-sm text-gray-500">
+                            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 text-xs sm:text-sm text-gray-500">
                                 <div className="flex items-center gap-2">
                                     <div className="h-2 w-2 rounded-full bg-green-500" />
                                     No signup required
